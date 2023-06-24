@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Free Web tutorials">
+        <meta name="keywords" content="HTML, CSS, JavaScript">
+        <meta name="author" content="John Doe">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>vemDeco a sua plataforma de venda digital</title>
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/uikit.min.css" />
+        <script src="js/uikit.min.js"></script>
+        <script src="js/uikit-icons.min.js"></script>
+        <link rel="icon" href="favicon.ico">
+    </head>
+    <body>
+        <nav class="navbar">
+            <div id="menuToggle">
+                <!--
+                A fake / hidden checkbox is used as click reciever,
+                so you can use the :checked selector on it.
+                -->
+                <input type="checkbox" />
+                
+                <!--
+                Some spans to act as a hamburger.
+                
+                They are acting like a real hamburger,
+                not that McDonalds stuff.
+                -->
+                <span></span>
+                <span></span>
+                <span></span>
+                
+                <!--
+                Too bad the menu has to be inside of the button
+                but hey, it's pure CSS magic.
+                -->
+                <ul id="menu">
+                    <a href="#"><li>Home</li></a>
+                    <a href="#"><li>About</li></a>
+                    <a href="#"><li>Info</li></a>
+                    <a href="#"><li>Contact</li></a>
+                    <a href="https://erikterwan.com/" target="_blank"><li>Show me more</li></a>
+                </ul>
+            </div>
+            <div class="logo">
+                <img src="assets/images/vem-deco-plataforma-digital-logo.png">
+            </div>
+      
+            <ul class="nav-items">
+                <li><a href="/" data-link>Home</a></li>
+                <li><a href="/about" data-link>About</a></li>
+                <li><a href="/contact" data-link>Contact us</a></li>
+                <li><a href="/" data-link>Home</a></li>
+                <li><a href="/about" data-link>About</a></li>
+                <li><a href="/contact" data-link>Contact us</a></li>
+            </ul>
+
+            <ul class="nav-items">
+                <li class="btlogin">
+                    <a href="/" data-link>
+                    <span class="login-icon" uk-icon="user"></span>
+                        Login
+                    </a>
+                </li>
+            </ul>
+        </nav>
+      
+        <div id="home">
+            <div class="uk-position-relative uk-visible-toggle" tabindex="-1" uk-slideshow="animation: push">
+                <ul class="uk-slideshow-items">
+                    <li>
+                        <img src="https://getuikit.com/docs/images/photo.jpg" alt="" uk-cover>
+                        <div class="uk-position-center uk-position-small uk-text-center uk-light">
+                            <h2 class="uk-margin-remove">Center</h2>
+                            <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="https://getuikit.com/docs/images/dark.jpg" alt="" uk-cover>
+                        <div class="uk-position-bottom uk-position-medium uk-text-center uk-light">
+                            <h3 class="uk-margin-remove">Bottom</h3>
+                            <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="https://getuikit.com/docs/images/light.jpg" alt="" uk-cover>
+                        <div class="uk-overlay uk-overlay-primary uk-position-bottom uk-text-center">
+                            <h3 class="uk-margin-remove">Overlay Bottom</h3>
+                            <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="https://getuikit.com/docs/images/dark.jpg" alt="" uk-cover>
+                        <div class="uk-overlay uk-overlay-default uk-position-bottom-right uk-position-small">
+                            <h3 class="uk-margin-remove">Overlay Bottom Right</h3>
+                            <p class="uk-margin-remove">Lorem ipsum dolor sit amet.</p>
+                        </div>
+                    </li>
+                </ul>
+            
+                <div class="uk-light">
+                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
