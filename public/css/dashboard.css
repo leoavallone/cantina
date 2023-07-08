@@ -10,7 +10,7 @@
  
  .navbar{
     background-color: rgb(3, 43, 83);
-    padding: 20px;
+    padding: 0px 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,6 +34,8 @@
     color: white;
     font-size: larger;
     font-style: oblique;
+    border-right: 1px solid #fff;
+    padding-right: 15px;
  }
 
  ul{
@@ -49,36 +51,46 @@
     height: 80%;
  }
 
-.btlogin{
-    background-color: rgb(255, 255, 255);
-    border-radius: 20px;
+ .btlogin {
     padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+}
+
+.btlogin h5 {
+    color: rgb(255, 255, 255) !important;
+    margin-right: 15px;
+    margin-bottom: 0px;
 }
 
 .btlogin a {
-    color: rgb(3, 43, 83) !important;
+    color: rgb(255, 255, 255) !important;
     text-decoration: none !important;
     margin-top: 5px !important;
 }
 
 .btlogin .login-icon{
     border-radius: 50px;
-    border: 2px solid rgb(3, 43, 83);
+    border: 2px solid rgb(255, 255, 255);
     padding: 5px;
     width: 30px;
     height: 30px;
 }
 
+.info {
+    text-align: center;
+}
+
+.options {
+    font-size: 12px;
+    text-decoration: underline !important;
+}
+
 #menuToggle
 {
-  display: block;
-  top: 50px;
-  left: 50px;
-  
-  z-index: 1;
-  
-  -webkit-user-select: none;
-  user-select: none;
+  display: none;
 }
 
 #menuToggle a
@@ -153,7 +165,7 @@
 {
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
-  background: #232323;
+  background: #fff;
 }
 
 /*
@@ -179,12 +191,11 @@
  */
 #menu
 {
-  position: absolute;
   width: 300px;
   margin: -100px 0 0 -50px;
   padding: 50px;
   padding-top: 125px;
-  background: #ededed;
+  background: rgb(3, 43, 83);
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */
@@ -208,7 +219,64 @@
   transform: none;
 }
 
+.content {
+  padding: 10% 5% !important;
+  background: linear-gradient(-90deg, rgb(240, 240, 240), rgb(255, 255, 255));
+}
+
+.footer {
+  background: #fff;
+  padding: 1.5% 5%;
+}
+
+.footer .uk-card {
+  box-shadow: none;
+}
+
+.social{
+  justify-content: center;
+}
+
+.social a, .mail a {
+  color: rgb(3, 43, 83) !important;
+}
+
+.contact a{
+  color: #25d366 !important;
+}
+
+.sales,.house {
+    min-width: 60px !important;
+    height: 35px !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+}
+
+.sales{
+    background:rgb(255, 0, 0) !important;
+}
+
+.house{
+    background: rgb(247 193 0) !important;
+}
+
+.uk-card-title{
+    margin-top: 10px;
+}
+
 @media(max-width: 768px){
+    #menuToggle{
+      position: absolute;
+      display: block;
+      top: 50px;
+      left: 50px;
+      
+      z-index: 1;
+      
+      -webkit-user-select: none;
+      user-select: none;
+      height: 100%;
+    }
     .navbar{
         display: block;
     }
@@ -221,5 +289,11 @@
     }
     .navbar ul li {
         margin-left: 0px;
+    }
+    .menuDesktop{
+      display: none;
+    }
+    .logo img {
+      width: 75px;
     }
 }
