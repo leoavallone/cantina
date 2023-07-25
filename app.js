@@ -30,8 +30,22 @@ app.get('/dashboard', (req, res) => {
     res.render('dashboard', { text: 'Dashboard Page'})
 })
 
+app.get('/estoque', (req, res) => {
+    res.render('estoque', { text: 'Estoque Page'})
+})
 
 
+app.get('/cardapio', (req, res) => {
+    res.render('cardapio', { text: 'Cardapio Page'})
+})
+
+app.get('/cardapio-item', (req, res) => {
+    res.render('cardapioItens', { text: 'Cardapio Itens Page'})
+})
+
+app.get('/usuarios', (req, res) => {
+    res.render('usuarios', { text: 'Usuarios Page'})
+})
 
 
 //  Listen on port 3000
