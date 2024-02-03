@@ -27,8 +27,7 @@ class App {
     }
 
     public function getMethod($route, $controller){
-        $method = $route[2] ?? "index";
-
+        $method = $route[1] ?? "index";
         if(!method_exists($controller, $method)){
             $method = "index";
         }

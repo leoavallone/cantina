@@ -41,7 +41,7 @@
             <ul class="nav-items">
                 <li class="btlogin">
                     <div class="info">
-                        <h5>Leandro Brito</h5>
+                        <h5>Leonardo Avallone</h5>
                         <a class="options" href="./login.php">Configurações</a> |
                         <a class="options" href="./login.php">Sair</a>
                     </div>
