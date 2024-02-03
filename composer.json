@@ -1,0 +1,19 @@
+{
+    "name": "leandrodonascimento/cantina",
+    "autoload": {
+        "psr-4": {
+            "Leandrodonascimento\\Cantina\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Leonardo Avallone",
+            "email": "leonardosavallone@outlook.com"
+        },
+        {
+            "name": "Leandro Nogueira",
+            "email": "klonoa51@gmail.com"
+        }
+    ],
+    "require": {}
+}
