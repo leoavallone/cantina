@@ -12,4 +12,10 @@ abstract class Controller {
     public function view($view){
         require_once "app/views/template.php";
     }
+
+    public function isAuth(){
+        if(!isset($_SESSION["authenticated"])){
+            header("Location: /login");
+        }
+    }
 }

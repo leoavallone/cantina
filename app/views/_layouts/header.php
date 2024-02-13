@@ -29,8 +29,8 @@
                 </ul>
             </div>
             <div class="logo">
-                <a href="./index.php" data-link>
-                    <img src="./img/logo-branco-icone.png" alt="Sistema da Cantina" title="Sistema da Cantina">
+                <a href="http://localhost:90/dashboard" data-link>
+                    <img src="public/img/logo-branco-icone.png" alt="Sistema da Cantina" title="Sistema da Cantina">
                 </a>
             </div>
       
@@ -41,9 +41,15 @@
             <ul class="nav-items">
                 <li class="btlogin">
                     <div class="info">
-                        <h5>Leonardo Avallone</h5>
-                        <a class="options" href="./login.php">Configurações</a> |
-                        <a class="options" href="./login.php">Sair</a>
+                        <?php
+                            if($_SESSION["login"]){
+                                echo "<h5>".ucfirst($_SESSION["login"])."</h5>";
+                            }else{
+                                echo "<h5>Unknown user</h5>";
+                            }
+                        ?>
+                        <a class="options" href="http://localhost:90/dashboard">Configurações</a> |
+                        <a class="options" href="http://localhost:90/dashboard/logout">Sair</a>
                     </div>
                     <div class="avatar">
                         <a href="/login.php" data-link>

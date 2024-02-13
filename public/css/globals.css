@@ -66,6 +66,7 @@
     color: rgb(255, 255, 255) !important;
     margin-right: 15px;
     margin-bottom: 0px;
+    font-size: 18px;
 }
 
 .btlogin a {
@@ -83,7 +84,8 @@
 }
 
 .info {
-    text-align: center;
+    text-align: left;
+    margin-right: 15px;
 }
 
 .options {
@@ -224,6 +226,11 @@
 
 .content {
   padding: 10% 5% !important;
+  background: linear-gradient(-90deg, rgb(240, 240, 240), rgb(255, 255, 255));
+}
+
+.content-inner {
+  padding: 5% 5% 10% 5% !important;
   background: linear-gradient(-90deg, rgb(240, 240, 240), rgb(255, 255, 255));
 }
 
