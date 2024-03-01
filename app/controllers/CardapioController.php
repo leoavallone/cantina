@@ -2,23 +2,24 @@
 
 use Leandrodonascimento\Cantina\Core\Controller;
 
-class EstoqueController extends Controller{
+class CardapioController extends Controller{
     public function __construct(){
         $this->isAuth();
     }
 
     public function index(){
-        $estoqueData = $this->model("estoque");
+        $estoqueData = $this->model("cardapio");
         $this->dataReturned = $estoqueData->getDataEstoque();
-        $this->view("estoque", $data = ["estoque" => $this->dataReturned]);
+        //print_r($this->dataReturned);
+        $this->view("cardapios", $data = ["cardapio" => $this->dataReturned]);
     }
 
     public function criar(){
         header('Content-Type: application/json; charset=utf-8');
-        $estoqueModel = $this->model("estoque");
-        $estoqueModel->createEstoque($_POST["nome"],$_POST["descricao"],$_POST["quantidade"]);
+        $estoqueModel = $this->model("cardapio");
+        $estoqueModel->createEstoque($_POST["descricao"],$_POST["data"],$_POST["status"]);
         $json = [];
-        $json['item'] = $_POST["nome"];
+        $json['item'] = $_POST["descricao"];
         echo json_encode($json);
     }
 

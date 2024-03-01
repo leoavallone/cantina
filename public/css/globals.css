@@ -274,6 +274,10 @@
     margin-top: 10px;
 }
 
+.trashButton{
+  color: #666 !important;
+}
+
 @media(max-width: 768px){
     #menuToggle{
       position: absolute;

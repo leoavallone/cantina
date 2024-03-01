@@ -13,7 +13,7 @@
             </a>
         </div>
         <div>
-            <a href="/cardapios">
+            <a href="/cardapio">
                 <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                     <span uk-icon="cart"></span>
                     <h3 class="uk-card-title">Cardápio</h3>
@@ -31,7 +31,7 @@
             </a>
         </div>
         <div>
-            <a href="/usuarios">
+            <a href="/usuario">
                 <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                     <span uk-icon="user"></span>
                     <h3 class="uk-card-title">Usuarios</h3>
