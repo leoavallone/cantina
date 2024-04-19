@@ -274,8 +274,18 @@
     margin-top: 10px;
 }
 
-.trashButton{
+.trashButton, .editBtn{
   color: #666 !important;
+}
+
+.cover{
+  width:100%
+}
+
+.menu {
+  max-width: 768px;
+  display: block;
+  margin: 0px auto;
 }
 
 @media(max-width: 768px){
@@ -311,7 +321,3 @@
       width: 75px;
     }
 }
-
-    .cover{
-      width:100%
-    }

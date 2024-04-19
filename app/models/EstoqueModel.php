@@ -19,4 +19,18 @@ class EstoqueModel extends Model {
         $result = $pdo->prepare($query);
         return $result->execute([$nome,$descricao,$quantidade]);
     }
+
+    public function editarEstoque($id,$nome,$descricao,$quantidade){
+        $pdo = $this->getPDO();
+        $query = "UPDATE estoque SET nome=?, descricao=?, quantidade=? WHERE id=?";
+        $result = $pdo->prepare($query);
+        return $result->execute([$nome,$descricao,$quantidade,$id]);
+    }
+
+    public function deletarEstoque($id){
+        $pdo = $this->getPDO();
+        $query = "DELETE FROM estoque WHERE id=?";
+        $result = $pdo->prepare($query);
+        return $result->execute([$id]);
+    }
 }

@@ -21,7 +21,7 @@
                     <td>Table Data</td>
                     <td>Table Data</td>
                     <td>
-                        <a href="cardapioitens.html"><span uk-icon="pencil"></span></a>
+                        <a href="cardapioitens.html" class="editBtn"><span uk-icon="pencil"></span></a>
                         <span uk-icon="trash"></span>
                     </td>
                 </tr>
@@ -30,7 +30,7 @@
                     <td>Table Data</td>
                     <td>Table Data</td>
                     <td>
-                        <a href="cardapioitens.html"><span uk-icon="pencil"></span></a>
+                        <a href="cardapioitens.html" class="editBtn"><span uk-icon="pencil"></span></a>
                         <span uk-icon="trash"></span>
                     </td>
                 </tr>
@@ -39,7 +39,7 @@
                     <td>Table Data</td>
                     <td>Table Data</td>
                     <td>
-                        <a href="cardapioitens.html"><span uk-icon="pencil"></span></a>
+                        <a href="cardapioitens.html" class="editBtn"><span uk-icon="pencil"></span></a>
                         <span uk-icon="trash"></span>
                     </td>
                 </tr>
