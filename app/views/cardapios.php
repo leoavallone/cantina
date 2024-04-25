@@ -10,7 +10,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Titulo</th>
+                    <th>Descricao</th>
                     <th>Ativo</th>
                     <th>Ações</th>
                 </tr>
@@ -56,7 +56,7 @@
                 <div class="uk-margin">
                     <div class="uk-inline uk-width-1-1">
                         <span class="uk-form-icon" uk-icon="icon: info"></span>
-                        <input id="descricao" name="descricao" class="uk-input" type="text" aria-label="Not clickable icon" placeholder="Titulo:">
+                        <input id="descricao" name="descricao" class="uk-input" type="text" aria-label="Not clickable icon" placeholder="Descricao:">
                     </div>
                 </div>
 
@@ -75,7 +75,7 @@
             </form>
         </div>
         <p class="uk-text-right">
-            <button id="remove-cardaio" class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
             <button id="cardapio-button" class="uk-button uk-button-primary" type="button">Salvar</button>
         </p>
     </div>
@@ -86,16 +86,21 @@
     const cardapioButton = document.getElementById("cardapio-button");
     const deletBtn = document.getElementById("remove-cardaio");
 
-    deletBtn.addEventListener("click",(e) => {
-        e.preventDefault();
-        UIkit.modal("#remove-cardapio-modal").show();
-    })
+    // deletBtn.addEventListener("click",(e) => {
+    //     e.preventDefault();
+    //     UIkit.modal("#remove-cardapio-modal").show();
+    // });
+
+    function dateToTimestamp(data){
+        const date = new Date(data).toISOString().slice(0, 19).replace('T', ' ');
+        return date.getTime();
+    }
 
     cardapioButton.addEventListener("click",(e) => {
         e.preventDefault();
 
         const descricao = cardapioForm.descricao.value;
-        const data = cardapioForm.data.value;
+        const data = dateToTimestamp(cardapioForm.data.value);
         const status = cardapioForm.status.value;
 
         if(data ==="" || descricao ==="" || status ===""){

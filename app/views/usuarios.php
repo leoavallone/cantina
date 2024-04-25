@@ -29,7 +29,7 @@
                         <td><?= $nivel[$value['role']-1] ?></td>
                         <td><?= $status[$value['status']] ?></td>
                         <td>
-                            <a href="#" onclick="editarUser(<?= $value['id'] ?>,'<?= $value['login'] ?>','<?= $value['email'] ?>','<?= $value['password'] ?>',<?= $value['role'] ?>)" class="editBtn"><span uk-icon="pencil"></span></a>
+                            <a href="#" onclick="editarUser(<?= $value['id'] ?>,'<?= $value['login'] ?>','<?= $value['email'] ?>','<?= $value['password'] ?>','<?= $value['status'] ?>',<?= $value['role'] ?>)" class="editBtn"><span uk-icon="pencil"></span></a>
                             <a href="#" onclick="deleteUser(<?= $value['id'] ?>)" class="trashButton">
                                 <span uk-icon="trash"></span>
                             </a>
@@ -76,6 +76,12 @@
                         <option value="3">Venda</option>
                     </select>
                 </div>
+
+                <div class="uk-margin">
+                    <span>Status</span>
+                    <label><input id="status" class="uk-radio" type="radio" name="status" value="1"> Ativo</label>
+                    <label><input id="status" class="uk-radio" type="radio" name="status" value="2"> Inativo</label>
+                </div>
             </form>
         </div>
         <p class="uk-text-right">
@@ -91,15 +97,17 @@
     const loginInput = document.querySelector('input[name="login"]');
     const emailInput = document.querySelector('input[name="email"]');
     const senhaInput = document.querySelector('input[name="senha"]');
+    const statusInput = document.querySelector('input[name="status"]');
     const nivelInput = document.querySelector('select[name="nivel"]');
     let idInput = 0;
 
-    function editarUser(id,login,email,senha,role){
+    function editarUser(id,login,email,senha,status,role){
         idInput = id;
         loginInput.value = login;
         emailInput.value = email;
         senhaInput.value = senha;
         nivelInput.value = role;
+        statusInput.value = status;
         UIkit.modal("#add-user").show();
     }
 
