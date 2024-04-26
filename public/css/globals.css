@@ -288,6 +288,18 @@
   margin: 0px auto;
 }
 
+.quantidade {
+  text-align: left;
+}
+
+.quantidade h3{
+  font-size: 16px;
+}
+
+.finalizado {
+  border-radius: 20px !important; 
+}
+
 @media(max-width: 768px){
     #menuToggle{
       position: absolute;
