@@ -116,7 +116,7 @@
                 body: urlencoded,
             };
 
-            fetch("http://localhost:90/estoque/deletar", requestOptions)
+            fetch("/estoque/deletar", requestOptions)
             .then(response => response.json())
             .then(json => {
                 if(json.error){
@@ -152,7 +152,7 @@
         const nome = estoqueForm.nome.value;
         const descricao = estoqueForm.descricao.value;
         const quantidade = estoqueForm.quantidade.value;
-        var url = "http://localhost:90/estoque/criar";
+        var url = "/estoque/criar";
         var successMessage = "Item adicionado ao estoque";
         if(nome ==="" || descricao ==="" || quantidade ===""){
             UIkit.notification({
@@ -171,7 +171,7 @@
 
         if(idInput > 0){
             urlencoded.append("id", idInput);
-            url = "http://localhost:90/estoque/editar"
+            url = "/estoque/editar"
             successMessage = "Item editado com sucesso!"
         }
 

@@ -1,6 +1,6 @@
 <?php
 
-use Leandrodonascimento\Cantina\Core\Model;
+use App\core\Model;
 
 class LoginModel extends Model {
     public function __construct(){}

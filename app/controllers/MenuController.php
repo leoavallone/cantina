@@ -1,6 +1,6 @@
 <?php
 
-use Leandrodonascimento\Cantina\Core\Controller;
+use App\core\Controller;
 
 class MenuController extends Controller{
     public function __construct(){
@@ -16,11 +16,18 @@ class MenuController extends Controller{
 
     public function criar(){
         header('Content-Type: application/json; charset=utf-8');
-        $estoqueModel = $this->model("cardapio");
+        $estoqueModel = $this->model("Cardapio");
         $estoqueModel->createEstoque($_POST["descricao"],$_POST["data"],$_POST["status"]);
         $json = [];
         $json['item'] = $_POST["descricao"];
         echo json_encode($json);
+    }
+
+    public function searchByCat(){
+        header('Content-Type: application/json; charset=utf-8');
+        $estoqueModel = $this->model("Menu");
+        $this->dataReturned = $estoqueModel->searchItemMenuByCat($_POST["categoria"]);
+        echo json_encode($this->dataReturned);
     }
 
     public function logout(){

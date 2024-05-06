@@ -2,7 +2,7 @@
     "name": "leandrodonascimento/cantina",
     "autoload": {
         "psr-4": {
-            "Leandrodonascimento\\Cantina\\": "app/"
+            "App\\": "app/"
         }
     },
     "authors": [

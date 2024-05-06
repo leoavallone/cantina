@@ -1,6 +1,6 @@
 <?php
 
-namespace Leandrodonascimento\Cantina\Core;
+namespace App\core;
 
 abstract class Controller {
     public $dataReturned = [];

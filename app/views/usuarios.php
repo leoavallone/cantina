@@ -124,7 +124,7 @@
                 body: urlencoded,
             };
 
-            fetch("http://localhost:90/estoque/deletar", requestOptions)
+            fetch("/estoque/deletar", requestOptions)
             .then(response => response.json())
             .then(json => {
                 if(json.error){
@@ -160,8 +160,8 @@
         const nome = userForm.nome.value;
         const descricao = userForm.descricao.value;
         const quantidade = userForm.quantidade.value;
-        var url = "http://localhost:90/estoque/criar";
-        var successMessage = "Item adicionado ao estoque";
+        var url = "/estoque/criar";
+        var successMessage = "Usuario adicionado com sucesso";
         if(nome ==="" || descricao ==="" || quantidade ===""){
             UIkit.notification({
                 message: "Todos os campos são obrigatórios",
@@ -179,8 +179,8 @@
 
         if(idInput > 0){
             urlencoded.append("id", idInput);
-            url = "http://localhost:90/estoque/editar"
-            successMessage = "Item editado com sucesso!"
+            url = "/estoque/editar"
+            successMessage = "Usuario editado com sucesso!"
         }
 
         urlencoded.append("nome", nome);

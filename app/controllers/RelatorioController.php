@@ -1,6 +1,6 @@
 <?php
 
-use Leandrodonascimento\Cantina\Core\Controller;
+use App\core\Controller;
 
 class RelatorioController extends Controller{
     public function __construct(){

@@ -77,7 +77,7 @@
             body: urlencoded,
         };
 
-        fetch("http://localhost:90/login/auth", requestOptions)
+        fetch("/login/auth", requestOptions)
         .then(response => response.json())
         .then(json => {
             if(json.error){
@@ -97,7 +97,7 @@
             })
 
             setTimeout(() => {
-                window.location.href = 'http://localhost:90/dashboard';
+                window.location.href = '/dashboard';
             }, "2000");
         })
         .catch(error => {

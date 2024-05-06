@@ -1,6 +1,6 @@
 <?php
 
-use Leandrodonascimento\Cantina\Core\Controller;
+use App\core\Controller;
 
 class UsuarioController extends Controller{
     public function __construct(){
@@ -8,7 +8,7 @@ class UsuarioController extends Controller{
     }
 
     public function index(){
-        $userData = $this->model("usuario");
+        $userData = $this->model("Usuario");
         $this->dataReturned = $userData->getDataUser();
         $this->view("usuarios", $data = ["user" => $this->dataReturned]);
     }

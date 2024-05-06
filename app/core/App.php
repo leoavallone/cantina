@@ -1,6 +1,6 @@
 <?php
 
-namespace Leandrodonascimento\Cantina\Core;
+namespace App\core;
 
 class App {
     public function __construct()

@@ -1,6 +1,6 @@
 <?php
 
-use Leandrodonascimento\Cantina\Core\Controller;
+use App\core\Controller;
 
 class EstoqueController extends Controller{
     public function __construct(){
@@ -8,14 +8,14 @@ class EstoqueController extends Controller{
     }
 
     public function index(){
-        $estoqueData = $this->model("estoque");
+        $estoqueData = $this->model("Estoque");
         $this->dataReturned = $estoqueData->getDataEstoque();
         $this->view("estoque", $data = ["estoque" => $this->dataReturned]);
     }
 
     public function criar(){
         header('Content-Type: application/json; charset=utf-8');
-        $estoqueModel = $this->model("estoque");
+        $estoqueModel = $this->model("Estoque");
         $estoqueModel->createEstoque($_POST["nome"],$_POST["descricao"],$_POST["quantidade"]);
         $json = [];
         $json['item'] = $_POST["nome"];
@@ -30,7 +30,7 @@ class EstoqueController extends Controller{
             return; 
         }
        
-        $estoqueModel = $this->model("estoque");
+        $estoqueModel = $this->model("Estoque");
         $estoqueModel->editarEstoque($_POST["id"],$_POST["nome"],$_POST["descricao"],$_POST["quantidade"]);
         $json = [];
         $json['item'] = $_POST["nome"];
@@ -39,7 +39,7 @@ class EstoqueController extends Controller{
 
     public function deletar(){
         header('Content-Type: application/json; charset=utf-8');
-        $estoqueModel = $this->model("estoque");
+        $estoqueModel = $this->model("Estoque");
         $estoqueModel->deletarEstoque($_POST["id"]);
         $json['status'] = 200;
         echo json_encode($json);

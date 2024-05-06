@@ -1,6 +1,6 @@
 <?php
 
-use Leandrodonascimento\Cantina\Core\Controller;
+use App\core\Controller;
 
 class PedidoController extends Controller{
     public function __construct(){

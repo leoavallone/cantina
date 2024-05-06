@@ -29,7 +29,7 @@
                 </ul>
             </div>
             <div class="logo">
-                <a href="http://localhost:90/dashboard" data-link>
+                <a href="/dashboard" data-link>
                     <img src="public/img/logo-branco-icone.png" alt="Sistema da Cantina" title="Sistema da Cantina">
                 </a>
             </div>

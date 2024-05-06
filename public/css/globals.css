@@ -300,6 +300,27 @@
   border-radius: 20px !important; 
 }
 
+.hideBox{
+  display: none !important;
+}
+
+.fullbackground{
+  height: 1180px;
+}
+
+.margin-break{
+  margin-top: 50px;
+}
+
+.cart{
+  border: 1px solid #ccc;
+  display: block;
+  margin: 50px auto;
+  padding: 10px;
+  width: 768px;
+  background: white;  
+}
+
 @media(max-width: 768px){
     #menuToggle{
       position: absolute;

@@ -2,7 +2,7 @@
 
 use App\core\Model;
 
-class EstoqueModel extends Model {
+class MenuModel extends Model {
     public function __construct(){}
 
     public function getDataEstoque(){
@@ -32,5 +32,13 @@ class EstoqueModel extends Model {
         $query = "DELETE FROM estoque WHERE id=?";
         $result = $pdo->prepare($query);
         return $result->execute([$id]);
+    }
+
+    public function searchItemMenuByCat($categoria){
+        $pdo = $this->getPDO();
+        $query = "SELECT * FROM cardapio_itens WHERE categoria=?";
+        $result = $pdo->prepare($query);
+        $result->execute([$categoria]);
+        return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

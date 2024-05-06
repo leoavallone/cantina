@@ -1,6 +1,6 @@
 <?php
 
-use Leandrodonascimento\Cantina\Core\Controller;
+use App\core\Controller;
 
 class LoginController extends Controller{
     public function __construct(){}
@@ -11,7 +11,7 @@ class LoginController extends Controller{
 
     public function auth(){
         header('Content-Type: application/json; charset=utf-8');
-        $authLogin = $this->model("login");
+        $authLogin = $this->model("Login");
         $data = $authLogin->getDataUser($_POST["email"]);
         $json = [];
         if(isset($data) && !empty($data["password"])){
