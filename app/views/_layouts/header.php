@@ -48,8 +48,8 @@
                                 echo "<h5>Unknown user</h5>";
                             }
                         ?>
-                        <a class="options" href="http://localhost:90/dashboard">Configurações</a> |
-                        <a class="options" href="http://localhost:90/dashboard/logout">Sair</a>
+                        <a class="options" href="/dashboard">Configurações</a> |
+                        <a class="options" href="/logout">Sair</a>
                     </div>
                     <div class="avatar">
                         <a href="/login.php" data-link>

@@ -60,6 +60,29 @@ class CardapioController extends Controller{
         echo json_encode($this->dataReturned);
     }
 
+    public function atualizarItem(){
+        header('Content-Type: application/json; charset=utf-8');
+        if(isset($data) && !empty($data["id"])){
+            $json["error"] = "Id do item não informado!";
+            echo json_encode($json);
+            return; 
+        }
+       
+        $cardapioModel = $this->model("Cardapio");
+        $cardapioModel->updateItemCardapio($_POST["id"],$_POST["nome"],$_POST["descricao"],$_POST["preco"],$_POST["quantidade"]);
+        $json = [];
+        $json['item'] = $_POST["nome"];
+        echo json_encode($json);
+    }
+
+    public function deletarItem(){
+        header('Content-Type: application/json; charset=utf-8');
+        $cardapioModel = $this->model("cardapio");
+        $cardapioModel->deletarItemCardapio($_POST["id"]);
+        $json['status'] = 200;
+        echo json_encode($json);
+    }
+
     public function logout(){
         $_SESSION = [];
         header("Location: /login");

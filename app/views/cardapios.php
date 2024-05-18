@@ -31,12 +31,12 @@
                         <td><?= $value['id'] ?></td>
                         <td><?= $value['descricao'] ?></td>
                         <td><?= formatarData($value['data']) ?></td>
-                        <td><?= $status[$value['status']] ?></td>
+                        <td><?= $status[$value['status']-1] ?></td>
                         <td>
                             <a href="#" alt="Editar Cardápio" title="Editar Cardápio" onclick="editarCardapio(<?= $value['id'] ?>,'<?= $value['descricao'] ?>','<?= $value['data'] ?>',<?= $value['status'] ?>)" class="editBtn"><span uk-icon="pencil"></span></a>
                             <a href="#" alt="Adicionar Itens ao Cardápio" title="Adicionar Itens ao Cardápio" onclick="adicionarItensCardapio(<?= $value['id'] ?>)" class="editBtn"><span uk-icon="plus"></span></a>
                             <a href="#" alt="Ver Itens do Cardápio" title="Ver Itens do Cardápio"alt="Editar Cardápio" title="Editar Cardápio" onclick="verItensCardapio(<?= $value['id'] ?>,'<?= $value['descricao'] ?>')" class="editBtn"><span uk-icon="eye"></span></a>
-                            <a href="#" alt="Deletar Cardápio" title="Deletar Cardápio" onclick="deleteCardapio(<?= $value['id'] ?>)" class="trashButton">
+                            <a href="#" alt="Deletar Cardápio" title="Deletar Cardápio" onclick="deletarCardapio(<?= $value['id'] ?>)" class="trashButton">
                                 <span uk-icon="trash"></span>
                             </a>
                         </td>
@@ -69,10 +69,12 @@
                     </div>
                 </div>
 
-                <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                    <span>Ativo?</span>
-                    <label><input id="sim" name="status" class="uk-radio" type="radio" value="1" checked>Sim</label>
-                    <label><input id="nao" name="status" class="uk-radio" type="radio" value="0">Não</label>
+                <div class="uk-margin">
+                    <span>Selecione o status do cardápio</span>
+                    <select id="nivel" name="status" class="uk-select" aria-label="Select">
+                        <option value="1">Inativo</option>
+                        <option value="2">Ativo</option>
+                    </select>
                 </div>
             </form>
         </div>
@@ -178,8 +180,8 @@
 
     //Inputs do cardapio
     const dataInput = document.querySelector('input[name="data"]');
-    const statusInput = document.querySelector('input[name="status"]');
-    const descricaoInput = document.querySelector('textarea[name="descricao"]');
+    const statusInput = document.querySelector('select[name="status"]');
+    const descricaoInput = document.querySelector('input[name="descricao"]');
 
     //Inputs dos itens cardapio
     const nomeItemInput = document.querySelector('input[name="nomeItem"]');
@@ -190,6 +192,23 @@
 
     //Id do item selecionado
     let idInput = 0;
+
+    function formaTimestampToData(data){
+        // Data original
+        var dataOriginal = data;
+
+        // Criar um objeto Date a partir da string
+        var data = new Date(dataOriginal);
+
+        // Extrair dia, mês e ano
+        var dia = data.getDate();
+        var mes = data.getMonth() + 1; // Lembrando que o mês em JavaScript é base 0 (janeiro é 0)
+        var ano = data.getFullYear();
+
+        // Formatar para dd/mm/yyyy
+        var dataFormatada = (dia < 10 ? '0' : '') + dia + '/' + (mes < 10 ? '0' : '') + mes + '/' + ano;
+        return dataFormatada;
+    }
 
     function formaDataToTimesTamp(dataString){
         // Dividindo a string da data em dia, mês e ano
@@ -215,7 +234,7 @@
 
     function editarCardapio(id,descricao,data,status){
         idInput = id;
-        dataInput.value = data;
+        dataInput.value = formaTimestampToData(data);
         descricaoInput.value = descricao;
         statusInput.value = status;
         UIkit.modal("#add-cardapio").show();
@@ -226,7 +245,7 @@
         UIkit.modal("#add-itens-cardapio").show();
     }
 
-    function deleteCardapio(id){
+    function deletarCardapio(id){
         UIkit.modal.confirm('Você quer remover esse registro?').then(function() {
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -239,7 +258,7 @@
                 body: urlencoded,
             };
 
-            fetch("/estoque/deletar", requestOptions)
+            fetch("/cardapio/deletar", requestOptions)
             .then(response => response.json())
             .then(json => {
                 if(json.error){
@@ -252,7 +271,7 @@
                     return
                 }
                 UIkit.notification({
-                    message: `Item removido do estoque`,
+                    message: `Cardápio deletado com sucesso!`,
                     status: "success",
                     pos: "top-left",
                     timeout: 2000
@@ -284,20 +303,18 @@
             })
             return;
         } 
-        // else if(!verifyDateFormat(data)){
-        //     UIkit.notification({
-        //         message: "Data inválida",
-        //         status: "danger",
-        //         pos: "top-left",
-        //         timeout: 2000
-        //     })
-        //     return;
-        // }
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
         var urlencoded = new URLSearchParams();
+        var url = "/cardapio/criar";
+        if(idInput > 0){
+            urlencoded.append("id", idInput);
+            url = "/cardapio/editar"
+            successMessage = "Cardápio editado com sucesso!"
+        }
+
         urlencoded.append("data", data);
         urlencoded.append("descricao", descricao);
         urlencoded.append("status", status);
@@ -312,7 +329,7 @@
             body: urlencoded,
         };
 
-        fetch("/cardapio/criar", requestOptions)
+        fetch(url, requestOptions)
         .then(response => response.json())
         .then(json => {
             if(json.error){
@@ -325,7 +342,7 @@
                 return
             }
             UIkit.notification({
-                message: `Cardápio criado!`,
+                message: successMessage,
                 status: "success",
                 pos: "top-left",
                 timeout: 2000
@@ -348,6 +365,7 @@
         const quantidadeItem = cardapioItemForm.quantidadeItem.value;
         const descricaoItem = cardapioItemForm.descricaoItem.value;
         const categoriaItem = cardapioItemForm.categoriaItem.value;
+        const itensDoCardapio = [];
 
         if(nomeItem ==="" || precoItem==="" || quantidadeItem==="" || descricaoItem ===""){
             UIkit.notification({
@@ -437,20 +455,18 @@
                 })
                 return
             }
-
+            itensDoCardapio = json;
             var tbody = document.getElementById("cardapio-itens-table");
             tbody.innerHTML = "";
             json.forEach(function(item) {
                 var tr = document.createElement("tr");
-                tr.innerHTML = "<td>" + item.nome + "</td>" +
-                            "<td>" + item.descricao + "</td>" +
-                            "<td>" + item.preco + "</td>" +
-                            "<td>" + item.quantidade + "</td>" +
-                            "<td><a href='#' alt='Deletar Item do Cardápio' title='Deletar Item do Cardápio' onclick='deleteItemCardapio("+item.id+")' class='trashButton'><span uk-icon='trash'></span></a></td>";
+                tr.innerHTML = "<td><input class='uk-input' id='nomeEdit-"+item.id+"' name='nomeEdit' type='text' value='" + item.nome + "' placeholder='Nome:'></td></td>" +
+                            "<td><input class='uk-input' id='descricaoEdit-"+item.id+"' name='descricaoEdit' type='text' value='" + item.descricao + "' placeholder='Descricao:'></td>" +
+                            "<td><input class='uk-input' id='precoEdit-"+item.id+"' name='precoEdit' type='text' value='" + item.preco + "' placeholder='Preço:'></td>" +
+                            "<td><input class='uk-input' id='quantidadeEdit-"+item.id+"' name='quantidadeItem' type='text' value='" + item.quantidade + "' placeholder='Quantidade:'></td>" +
+                            "<td><a href='#' alt='Atualizar Item do Cardápio' title='Atualizar Item do Cardápio' onclick='atualizaItemCardapio("+item.id+")' class='trashButton'><span uk-icon='refresh'></span></a><a href='#' alt='Deletar Item do Cardápio' title='Deletar Item do Cardápio' onclick='deletarItemCardapio("+item.id+")' class='trashButton'><span uk-icon='trash'></span></a></td>";
                 tbody.appendChild(tr);
             });
-
-            
         })
         .catch(error => {
             console.log('error', error)
@@ -471,5 +487,100 @@
         valor = (valor / 100).toFixed(2).replace(".", ",");
         valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         return valor;
+    }
+
+    function atualizaItemCardapio(idItem){
+        const nome = document.getElementById("nomeEdit-"+idItem).value;
+        const descricao = document.getElementById("descricaoEdit-"+idItem).value;
+        const preco = document.getElementById("precoEdit-"+idItem).value;
+        const quantidade = document.getElementById("quantidadeEdit-"+idItem).value;
+
+        console.log('ID: ', idItem);
+        console.log('Nome: ', nome);
+        console.log('Descricao: ', descricao);
+        console.log('Preco: ', preco);
+        console.log('Quantidade: ', quantidade);
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("id", idItem);
+        urlencoded.append("nome", nome);
+        urlencoded.append("descricao", descricao);
+        urlencoded.append("preco", preco);
+        urlencoded.append("quantidade", quantidade);
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: urlencoded,
+        };
+
+        fetch("/cardapio/atualizarItem", requestOptions)
+        .then(response => response.json())
+        .then(json => {
+            if(json.error){
+                UIkit.notification({
+                    message: `Erro: ${json.error}`,
+                    status: "danger",
+                    pos: "top-left",
+                    timeout: 2000
+                })
+                return
+            }
+            UIkit.notification({
+                message: `Item atualizado com sucesso!`,
+                status: "success",
+                pos: "top-left",
+                timeout: 2000
+            })
+            UIkit.modal("#add-itens-cardapio").hide();
+            setTimeout(() => {
+                window.location.reload();
+            }, "2000");
+        })
+        .catch(error => {
+            console.log('error', error)
+        });
+    }
+
+    function deletarItemCardapio(id){
+        var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+            var urlencoded = new URLSearchParams();
+            urlencoded.append("id", id);
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: urlencoded,
+            };
+
+            fetch("/cardapio/deletarItem", requestOptions)
+            .then(response => response.json())
+            .then(json => {
+                if(json.error){
+                    UIkit.notification({
+                        message: `Erro: ${json.error}`,
+                        status: "danger",
+                        pos: "top-left",
+                        timeout: 2000
+                    })
+                    return
+                }
+                UIkit.notification({
+                    message: `Item removido do cardapio`,
+                    status: "success",
+                    pos: "top-left",
+                    timeout: 2000
+                })
+                setTimeout(() => {
+                    window.location.reload();
+                }, "2000");
+            })
+            .catch(error => {
+                console.log('error', error)
+            });
     }
 </script>

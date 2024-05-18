@@ -41,11 +41,25 @@ class CardapioModel extends Model {
         return $result->execute([$cardapioId,$nome,$categoria,$quantidade,$preco,$descricao]);
     }
 
+    public function updateItemCardapio($id,$nome,$descricao,$preco,$quantidade){
+        $pdo = $this->getPDO();
+        $query = "UPDATE cardapio_itens SET nome=?, descricao=?, preco=?, quantidade=? WHERE id=?";
+        $result = $pdo->prepare($query);
+        return $result->execute([$nome,$descricao,$preco,$quantidade,$id]);
+    }
+
     public function getDataItemCardapio($cardapioId){
         $pdo = $this->getPDO();
         $query = "SELECT * FROM cardapio_itens WHERE cardapio_id=?";
         $result = $pdo->prepare($query);
         $result->execute([$cardapioId]);
         return $result->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function deletarItemCardapio($id){
+        $pdo = $this->getPDO();
+        $query = "DELETE FROM cardapio_itens WHERE id=?";
+        $result = $pdo->prepare($query);
+        return $result->execute([$id]);
     }
 }

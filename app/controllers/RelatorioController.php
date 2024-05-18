@@ -8,10 +8,9 @@ class RelatorioController extends Controller{
     }
 
     public function index(){
-        $estoqueData = $this->model("estoque");
-        $this->dataReturned = $estoqueData->getDataEstoque();
-        print_r($this->dataReturned);
-        $this->view("estoque", $data = ["estoque" => $this->dataReturned]);
+        $estoqueData = $this->model("Relatorio");
+        $this->dataReturned = $estoqueData->getDataRelatorio();
+        $this->view("relatorio", $data = ["relatorios" => $this->dataReturned]);
     }
 
     public function logout(){

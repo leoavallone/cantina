@@ -4,6 +4,24 @@
 <div id="home">
     <div class="uk-child-width-1-3@m content" uk-grid>
         <div>
+            <a href="/menu">
+                <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                    <span uk-icon="file-edit"></span>
+                    <h3 class="uk-card-title">Fazer Pedido</h3>
+                    <p>Visualizar e testar o cardápio do dia</p>
+                </div>
+            </a>
+        </div>
+        <div>
+            <a href="/pedido">
+                <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                    <span uk-icon="file-text"></span>
+                    <h3 class="uk-card-title">Ver Pedidos</h3>
+                    <p>Visualizar os pedidos feitos e dar baixa</p>
+                </div>
+            </a>
+        </div>
+        <div>
             <a href="/estoque">
                 <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                     <span uk-icon="bag"></span>
