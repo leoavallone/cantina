@@ -3,6 +3,7 @@
 ?>
 <div id="home">
     <div class="uk-child-width-1-3@m content" uk-grid>
+        <?php if($_SESSION && ($_SESSION['role'] === 1 || $_SESSION['role'] === 3)): ?>
         <div>
             <a href="/menu">
                 <div class="uk-card uk-card-default uk-card-hover uk-card-body">
@@ -12,6 +13,8 @@
                 </div>
             </a>
         </div>
+        <?php endif; ?>
+        <?php if($_SESSION && ($_SESSION['role'] === 1 || $_SESSION['role'] === 2)): ?>
         <div>
             <a href="/pedido">
                 <div class="uk-card uk-card-default uk-card-hover uk-card-body">
@@ -21,6 +24,8 @@
                 </div>
             </a>
         </div>
+        <?php endif; ?>
+        <?php if($_SESSION && ($_SESSION['role'] === 1 || $_SESSION['role'] === 2)): ?>
         <div>
             <a href="/estoque">
                 <div class="uk-card uk-card-default uk-card-hover uk-card-body">
@@ -30,6 +35,8 @@
                 </div>
             </a>
         </div>
+        <?php endif; ?>
+        <?php if($_SESSION && ($_SESSION['role'] === 1 || $_SESSION['role'] === 2)): ?>
         <div>
             <a href="/cardapio">
                 <div class="uk-card uk-card-default uk-card-hover uk-card-body">
@@ -39,6 +46,8 @@
                 </div>
             </a>
         </div>
+        <?php endif; ?>
+        <?php if($_SESSION && $_SESSION['role'] === 1): ?>
         <div>
             <a href="/relatorio">
                 <div class="uk-card uk-card-default uk-card-hover uk-card-body">
@@ -48,6 +57,8 @@
                 </div>
             </a>
         </div>
+        <?php endif; ?>
+        <?php if($_SESSION && $_SESSION['role'] === 1): ?>
         <div>
             <a href="/usuario">
                 <div class="uk-card uk-card-default uk-card-hover uk-card-body">
@@ -57,5 +68,6 @@
                 </div>
             </a>
         </div>
+        <?php endif; ?>
     </div>
 </div>

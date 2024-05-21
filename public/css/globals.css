@@ -343,6 +343,32 @@
   width: 70px;
 }
 
+.finishBottom {
+  background: red;
+  color: white;
+  padding: 5px;
+  border-radius: 20px;
+}
+
+.countContainer {
+  margin-bottom: 50px;
+}
+
+.countContainer .uk-badge {
+  box-sizing: border-box;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 8px;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.outStock {
+  background: red;
+  border-radius: 20px;
+  color: #fff !important;
+}
+
 @media(max-width: 768px){
     #menuToggle{
       position: absolute;

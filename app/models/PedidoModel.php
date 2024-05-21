@@ -5,12 +5,25 @@ use App\core\Model;
 class PedidoModel extends Model {
     public function __construct(){}
 
-    public function getDataPedido(){
+    public function getCardapio(){
         $pdo = $this->getPDO();
-        $query = "SELECT * FROM pedidos where status = 1";
+        $query = "SELECT * FROM cardapio WHERE status = 2 ORDER BY id ASC LIMIT 1";
         $result = $pdo->prepare($query);
         $result->execute();
-        return $result->fetchAll(\PDO::FETCH_ASSOC);
+        return $result->fetch();
+    }
+
+    public function getDataPedido(){
+        $cardapioId = $this->getCardapio();
+        $pedidos = [];
+        if(count($cardapioId) > 0){
+            $pdo = $this->getPDO();
+            $query = "SELECT * FROM pedidos where cardapio_id = ?";
+            $result = $pdo->prepare($query);
+            $result->execute([$cardapioId['id']]);
+            $pedidos = $result->fetchAll(\PDO::FETCH_ASSOC);
+        }
+        return $pedidos;
     }
 
 

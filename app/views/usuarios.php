@@ -78,9 +78,11 @@
                 </div>
 
                 <div class="uk-margin">
-                    <span>Status</span>
-                    <label><input id="status" class="uk-radio" type="radio" name="status" value="1"> Ativo</label>
-                    <label><input id="status" class="uk-radio" type="radio" name="status" value="2"> Inativo</label>
+                <span>Status</span>
+                    <select id="status" name="status" class="uk-select" aria-label="Select">
+                        <option value="1">Ativo</option>
+                        <option value="2">Inativo</option>
+                    </select>
                 </div>
             </form>
         </div>
@@ -96,8 +98,7 @@
     const userButton = document.getElementById("user-button");
     const loginInput = document.querySelector('input[name="login"]');
     const emailInput = document.querySelector('input[name="email"]');
-    const senhaInput = document.querySelector('input[name="senha"]');
-    const statusInput = document.querySelector('input[name="status"]');
+    const statusInput = document.querySelector('select[name="status"]');
     const nivelInput = document.querySelector('select[name="nivel"]');
     let idInput = 0;
 
@@ -105,7 +106,6 @@
         idInput = id;
         loginInput.value = login;
         emailInput.value = email;
-        senhaInput.value = senha;
         nivelInput.value = role;
         statusInput.value = status;
         UIkit.modal("#add-user").show();
@@ -157,12 +157,15 @@
     userButton.addEventListener("click",(e) => {
         e.preventDefault();
 
-        const nome = userForm.nome.value;
-        const descricao = userForm.descricao.value;
-        const quantidade = userForm.quantidade.value;
-        var url = "/estoque/criar";
+        const login = userForm.login.value;
+        const email = userForm.email.value;
+        const password = userForm.senha.value;
+        const status = userForm.status.value;
+        const nivel = userForm.nivel.value;
+        
+        var url = "/usuario/criar";
         var successMessage = "Usuario adicionado com sucesso";
-        if(nome ==="" || descricao ==="" || quantidade ===""){
+        if(login ==="" || email ===""){
             UIkit.notification({
                 message: "Todos os campos são obrigatórios",
                 status: "danger",
@@ -179,13 +182,15 @@
 
         if(idInput > 0){
             urlencoded.append("id", idInput);
-            url = "/estoque/editar"
+            url = "/usuario/editar"
             successMessage = "Usuario editado com sucesso!"
         }
 
-        urlencoded.append("nome", nome);
-        urlencoded.append("descricao", descricao);
-        urlencoded.append("quantidade", quantidade);
+        urlencoded.append("login", login);
+        urlencoded.append("email", email);
+        urlencoded.append("password", password);
+        urlencoded.append("status", status);
+        urlencoded.append("nivel", nivel);
 
         var requestOptions = {
             method: 'POST',
@@ -211,7 +216,7 @@
                 pos: "top-left",
                 timeout: 2000
             })
-            UIkit.modal("#add-estoque").hide();
+            UIkit.modal("#add-user").hide();
             setTimeout(() => {
                 window.location.reload();
             }, "2000");

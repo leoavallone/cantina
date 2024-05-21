@@ -13,10 +13,24 @@ class UsuarioModel extends Model {
         return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function createUser($login,$email,$password,$status){
+    public function createUser($login,$email,$password,$status,$role){
         $pdo = $this->getPDO();
-        $query = "INSERT INTO users (login, email, password, status) values(?,?,?,?)";
+        $query = "INSERT INTO users (login, email, password, status, role) values(?,?,?,?,?)";
         $result = $pdo->prepare($query);
-        return $result->execute([$login,$email,$password,$status]);
+        return $result->execute([$login,$email,$password,$status,$role]);
+    }
+
+    public function editarUser($id,$login,$email,$password,$status,$role){
+        $pdo = $this->getPDO();
+        if($password === ""){
+            $query = "UPDATE users SET login=?, email=?, status=?, role=? WHERE id=?";
+            $result = $pdo->prepare($query);
+            $execute = $result->execute([$login,$email,$status,$role,$id]);
+        }else{
+            $query = "UPDATE users SET login=?, email=?, password=?, status=?, role=? WHERE id=?";
+            $result = $pdo->prepare($query);
+            $execute = $result->execute([$login,$email,$password,$status,$role,$id]);
+        }
+        return $execute;
     }
 }

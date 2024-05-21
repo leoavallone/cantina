@@ -309,6 +309,7 @@
 
         var urlencoded = new URLSearchParams();
         var url = "/cardapio/criar";
+        var successMessage = "Cardápio criado com sucesso!"
         if(idInput > 0){
             urlencoded.append("id", idInput);
             url = "/cardapio/editar"

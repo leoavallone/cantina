@@ -42,11 +42,11 @@ class MenuModel extends Model {
         return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function getItemByName($nome){
+    public function getItemByName($nome,$cardapioId){
         $pdo = $this->getPDO();
-        $query = "SELECT * FROM cardapio_itens WHERE nome = ?";
+        $query = "SELECT * FROM cardapio_itens WHERE nome = ? AND cardapio_id=?";
         $result = $pdo->prepare($query);
-        $result->execute([$nome]);
+        $result->execute([$nome,$cardapioId]);
         return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
 

@@ -28,7 +28,7 @@ class MenuController extends Controller{
         $carrinho = json_decode($_POST["carrinho"],true);
         if(is_array($carrinho)){
             foreach($carrinho as $car){
-                $itemCardapio = $estoqueModel->getItemByName($car["nome"]);
+                $itemCardapio = $estoqueModel->getItemByName($car["nome"],$_POST["cardapioId"]);
                 if($itemCardapio){
                     $novaQuantidade = $itemCardapio[0]["quantidade"] - $car["quantidade"];
                     $estoqueModel->atualizaQtd($_POST["cardapioId"],$car["nome"], $novaQuantidade);

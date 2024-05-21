@@ -67,7 +67,7 @@
                             </div>
                         </div>
                     </div>
-                </div>     
+                </div>
             </div>
             <div class="uk-child-width-1-2@m uk-child-width-1-2@s uk-animation-slide-bottom hideBox" id="passo-3" uk-grid>
             </div>
@@ -138,7 +138,7 @@
             </div>
             <p class="uk-text-right" id="prepare">
                 <button class="uk-button uk-button-default" onclick="limparCarrinho()" type="button">Limpar Carrinho</button>
-                <button class="uk-button uk-button-primary" onclick="finalizarCompra()" type="button">Finalizar Compra</button>
+                <button id="finalizaPedido" class="uk-button uk-button-primary" onclick="finalizarCompra()" type="button">Finalizar Compra</button>
             </p>
         </div>
     </div>
@@ -209,19 +209,36 @@
             var itensCardapio = document.getElementById("passo-3");
             itensCardapio.innerHTML = "";
             json.forEach(function(item) {
+                console.log('Itens do cardápio: ', item);
                 var divCardCardapio = document.createElement("div");
-                divCardCardapio.innerHTML = "<div onclick='detalheComida("+item.id+")'>"+
+                divCardCardapio.innerHTML = "<div>"+
                     "<div>"+
-                        "<div class='uk-card uk-card-default'>"+
-                            "<div class='uk-card-media-top'>"+
-                                "<img class='cover' src='"+imgCardapio[item.categoria]+"' alt=''>"+
-                            "</div>"+
-                            "<div class='uk-card-body'>"+
-                                "<h3 class='uk-card-title uk-text-center'>"+item.nome+"</h3>"+
+                            "<div class='uk-card uk-card-default'>"+
+                                "<div class='uk-card-media-top'>"+
+                                    "<img class='cover' src='"+imgCardapio[item.categoria]+"' alt=''>"+
+                                "</div>"+
+                                "<div class='uk-card-body'>"+
+                                    "<h3 class='uk-card-title uk-text-center'>"+item.nome+"</h3>"+
+                                    "<h4 class='uk-card-title uk-text-center outStock'>Esgotado</h3>"+
+                                "</div>"+
                             "</div>"+
                         "</div>"+
-                    "</div>"+
-                "</div>";
+                    "</div>";
+                if(item.quantidade > 0){
+                    divCardCardapio.innerHTML = "<div onclick='detalheComida("+item.id+")'>"+
+                    "<div>"+
+                            "<div class='uk-card uk-card-default'>"+
+                                "<div class='uk-card-media-top'>"+
+                                    "<img class='cover' src='"+imgCardapio[item.categoria]+"' alt=''>"+
+                                "</div>"+
+                                "<div class='uk-card-body'>"+
+                                    "<h3 class='uk-card-title uk-text-center'>"+item.nome+"</h3>"+
+                                "</div>"+
+                            "</div>"+
+                        "</div>"+
+                    "</div>";
+                }
+                
                 itensCardapio.appendChild(divCardCardapio);
             });
 
@@ -268,6 +285,7 @@
     }
 
     function back(){
+        console.log('Qual passo eu estou?: ', passoAtual);
         let stringAtual = `passo-${passoAtual}`;
         let stringAnterior = `passo-${passoAtual - 1}`;
        
@@ -331,6 +349,7 @@
         totalSpan = document.getElementById('total');
         total = 0;
         totalSpan.innerHTML = total;
+        carrinho = [];
         carrinhoDiv = document.getElementById('itensPedido');
         carrinhoDiv.innerHTML = "";
     }
@@ -352,6 +371,7 @@
 
     finalizaButton.addEventListener("click",(e) => {
         e.preventDefault();
+        document.getElementById("finalizaButton").disabled = true;
         if(carrinho.length == 0 ){
             UIkit.notification({
                 message: "Não há item nenhum no pedido!",
@@ -359,6 +379,7 @@
                 pos: "top-left",
                 timeout: 2000
             })
+            document.getElementById("finalizaButton").disabled = false;
             return;
         }
 
@@ -369,6 +390,7 @@
                 pos: "top-left",
                 timeout: 2000
             })
+            document.getElementById("finalizaButton").disabled = true;
             return;
         }
         var myHeaders = new Headers();

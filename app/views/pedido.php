@@ -1,8 +1,31 @@
 <?php 
     include('_layouts/header.php');
+    $totalPorItem = [];
+    // Iterar sobre os dados da tabela
+
+    foreach ($data['pedidos'] as $pedido) {
+        $itemsPedido = json_decode($pedido["itens"], true);
+        foreach ($itemsPedido as $item) {
+            $nomeItem = $item["nome"];
+            $quantidade = $item["quantidade"];
+            $totalItem = $item["quantidade"];
+            // Atualizar o total vendido para este item
+            if (array_key_exists($nomeItem, $totalPorItem)) {
+                $totalPorItem[$nomeItem] += $totalItem;
+            } else {
+                $totalPorItem[$nomeItem] = $totalItem;
+            }
+        }
+    }
 ?>
 <div id="home">
     <div class="content-inner">
+        <div class="countContainer">
+            <h3 class="text-center">Total vendido ate o momento:</h3>
+            <?php foreach ($totalPorItem as $item => $total):?>
+                <span class="uk-badge"><?php echo $item . ": " . $total;?> Unidades</span>
+            <?php endforeach;?>
+        </div>
         <div class="uk-child-width-1-3@m uk-child-width-1-3@s uk-text-center" uk-grid>
             <?php 
                 if(isset($data['pedidos']) && count($data['pedidos']) > 0):
@@ -10,6 +33,9 @@
             ?>
             <div class="pedidoCard">
                 <div class="uk-card uk-card-default uk-card-body">
+                    <?php if($value['status'] == 2): ?>
+                        <h2 class="finishBottom">Finalizado</h2>
+                    <?php endif ;?>
                     <h2>Pedido #<?= $value['id'] ?> - <?= $value['nome'] ?></h2>
                     <div class="quantidade">
                         <?php 
@@ -24,7 +50,9 @@
                         ?>
                         <h3>Consumo: <?= $value['modalidade'] ?></h3>
                     </div>
-                    <button onclick="finalizarPedido(<?= $value['id'] ?>)" class="finalizado uk-button uk-button-primary">Finalizar</button>
+                    <?php if($value['status'] == 1): ?>
+                        <button onclick="finalizarPedido(<?= $value['id'] ?>)" class="finalizado uk-button uk-button-primary">Finalizar</button>
+                    <?php endif ;?>
                 </div>
             </div>
             <?php 
@@ -36,6 +64,8 @@
 </div>
 
 <script>
+    var dadosTabela = <?= $pedidos; ?>
+    console.log('Dados da tabela: ', dadosTabela);
     function recarregarPagina() {
         location.reload();
     }
