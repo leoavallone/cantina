@@ -7,6 +7,24 @@
 <div id="home">
     <div class="content-inner">
         <h2>Relatorio de Vendas</h2>
+
+        <div class="uk-margin">
+            <?php if(isset($data['relatorios']) && count($data['relatorios']) > 0): ?>
+                <span>Selecione o cardápio que deseja puxar venda</span>
+                <select id="cardapios" name="cardapios" class="uk-select" aria-label="Select">
+                <option value="">Selecione...</option>
+                    <?php foreach($data['relatorios'] as $key => $value):?>
+                        <option value="<?= $value['id'] ?>"><?= $value['descricao'] ?></option>
+                    <?php endforeach; ?>  
+                </select>
+            <?php else: ?>
+                <h5>No momento não há vendas para registro</h5>
+            <?php endif; ?>
+        </div>
+        <div id="hasNoItens">
+            <h5>Não há vendas deste cardápio</h5>
+        </div>
+        <div id="totalItens"></div>
         <table class="uk-table uk-table-striped">
             <thead>
                 <tr>
@@ -14,176 +32,34 @@
                     <th>Pedido</th>
                     <th>total</th>
                     <th>Pagamento</th>
+                    <th>Quem fez</th>
                     <th>Status</th>
-                    <th>Ações</th>
                 </tr>
             </thead>
-            <tbody>
-                <?php 
-                    if(isset($data['relatorios']) && count($data['relatorios']) > 0):
-                        foreach($data['relatorios'] as $key => $value):
-                ?>
-                    <tr>
-                        <td><?= $value['id'] ?></td>
-                        <td><?= $value['itens'] ?></td>
-                        <td>R$ <?= $value['total'] ?></td>
-                        <td><?= $value['pagamento'] ?></td>
-                        <td><?= $nivel[$value['status']-1] ?></td>
-                        <td>
-                            <a href="#" onclick="editarUser(<?= $value['id'] ?>)" class="editBtn"><span uk-icon="pencil"></span></a>
-                        </td>
-                    </tr>
-                <?php 
-                        endforeach;
-                    endif;
-                ?>
-            </tbody>
+            <tbody id="relatorio-table"></tbody>
         </table>
     </div>
 </div>
 
-<div id="add-user" uk-modal>
-    <div class="uk-modal-dialog uk-modal-body">
-        <h3>Adicionar novo usuario</h3>
-        <div>
-            <form id="user-form">
-                <div class="uk-margin">
-                    <div class="uk-inline uk-width-1-1">
-                        <span class="uk-form-icon" uk-icon="icon: info"></span>
-                        <input id="login" name="login" class="uk-input" type="text" aria-label="Not clickable icon" placeholder="Login:">
-                    </div>
-                </div>
-                <div class="uk-margin">
-                    <div class="uk-inline uk-width-1-1">
-                        <span class="uk-form-icon" uk-icon="icon: info"></span>
-                        <input id="email" name="email" class="uk-input" type="text" aria-label="Not clickable icon" placeholder="E-mail:">
-                    </div>
-                </div>
-                <div class="uk-margin">
-                    <div class="uk-inline uk-width-1-1">
-                        <span class="uk-form-icon" uk-icon="icon: info"></span>
-                        <input id="senha" name="senha" class="uk-input" type="text" aria-label="Not clickable icon" placeholder="Senha de Acesso:">
-                    </div>
-                </div>
-
-                <div class="uk-margin">
-                    <span>Selecione o nível de acesso</span>
-                    <select id="nivel" name="nivel" class="uk-select" aria-label="Select">
-                        <option value="1">Super Admin</option>
-                        <option value="2">Estoque</option>
-                        <option value="3">Venda</option>
-                    </select>
-                </div>
-
-                <div class="uk-margin">
-                    <span>Status</span>
-                    <label><input id="status" class="uk-radio" type="radio" name="status" value="1"> Ativo</label>
-                    <label><input id="status" class="uk-radio" type="radio" name="status" value="2"> Inativo</label>
-                </div>
-            </form>
-        </div>
-        <p class="uk-text-right">
-            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-            <button id="user-button" class="uk-button uk-button-primary" type="button">Salvar</button>
-        </p>
-    </div>
-</div>
-
 <script type="text/javascript">
-    const userForm = document.getElementById("user-form");
-    const userButton = document.getElementById("user-button");
-    const loginInput = document.querySelector('input[name="login"]');
-    const emailInput = document.querySelector('input[name="email"]');
-    const senhaInput = document.querySelector('input[name="senha"]');
-    const statusInput = document.querySelector('input[name="status"]');
-    const nivelInput = document.querySelector('select[name="nivel"]');
-    let idInput = 0;
-
-    function editarUser(id,login,email,senha,status,role){
-        idInput = id;
-        loginInput.value = login;
-        emailInput.value = email;
-        senhaInput.value = senha;
-        nivelInput.value = role;
-        statusInput.value = status;
-        UIkit.modal("#add-user").show();
-    }
-
-    function deleteUser(id){
-        UIkit.modal.confirm('Você quer remover esse registro?').then(function() {
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-            var urlencoded = new URLSearchParams();
-            urlencoded.append("id", id);
-
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: urlencoded,
-            };
-
-            fetch("/estoque/deletar", requestOptions)
-            .then(response => response.json())
-            .then(json => {
-                if(json.error){
-                    UIkit.notification({
-                        message: `Erro: ${json.error}`,
-                        status: "danger",
-                        pos: "top-left",
-                        timeout: 2000
-                    })
-                    return
-                }
-                UIkit.notification({
-                    message: `Item removido do estoque`,
-                    status: "success",
-                    pos: "top-left",
-                    timeout: 2000
-                })
-                setTimeout(() => {
-                    window.location.reload();
-                }, "2000");
-            })
-            .catch(error => {
-                console.log('error', error)
-            });
-        }, function () {
-            console.log('Rejected.')
-        });
-    }
-   
-    userButton.addEventListener("click",(e) => {
-        e.preventDefault();
-
-        const nome = userForm.nome.value;
-        const descricao = userForm.descricao.value;
-        const quantidade = userForm.quantidade.value;
-        var url = "/estoque/criar";
-        var successMessage = "Usuario adicionado com sucesso";
-        if(nome ==="" || descricao ==="" || quantidade ===""){
-            UIkit.notification({
-                message: "Todos os campos são obrigatórios",
-                status: "danger",
-                pos: "top-left",
-                timeout: 2000
-            })
-            return;
-        }
-
+    // Seletor de cardápios
+    const hasNoItens = document.getElementById('hasNoItens');
+    const totalItens = document.getElementById('totalItens');
+    hasNoItens.style.display = "none";
+    totalItens.style.display = "none";
+    const cardapios = document.getElementById('cardapios');
+    const status = ["Ativo", "Finalizado"];
+    let tbody = document.getElementById("relatorio-table");
+    let total = 0;
+    // Adiciona evento de mudança ao seletor
+    cardapios.addEventListener('change', (event) => {
+        // Obtém o valor da opção selecionada
+        const selectedCardapioId = event.target.value;
+        console.log('Cardápio selecionado ID:', selectedCardapioId);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
         var urlencoded = new URLSearchParams();
-
-        if(idInput > 0){
-            urlencoded.append("id", idInput);
-            url = "/estoque/editar"
-            successMessage = "Usuario editado com sucesso!"
-        }
-
-        urlencoded.append("nome", nome);
-        urlencoded.append("descricao", descricao);
-        urlencoded.append("quantidade", quantidade);
+        urlencoded.append("cardapioId", selectedCardapioId);        
 
         var requestOptions = {
             method: 'POST',
@@ -191,7 +67,7 @@
             body: urlencoded,
         };
 
-        fetch(url, requestOptions)
+        fetch("/relatorio/getRelatorio", requestOptions)
         .then(response => response.json())
         .then(json => {
             if(json.error){
@@ -203,19 +79,44 @@
                 })
                 return
             }
-            UIkit.notification({
-                message: successMessage,
-                status: "success",
-                pos: "top-left",
-                timeout: 2000
-            })
-            UIkit.modal("#add-estoque").hide();
-            setTimeout(() => {
-                window.location.reload();
-            }, "2000");
+            if(json.length === 0){
+                total = 0;
+                hasNoItens.style.display = "block";
+                tbody.innerHTML = "";
+                totalItens.innerHTML = "";
+                return
+            }
+            total = 0;
+            hasNoItens.style.display = "none";
+            tbody.innerHTML = "";
+            json.forEach(function(item) {
+                total = total + parseInt(item.total);
+                var tr = document.createElement("tr");
+                tr.innerHTML = "<td>"+item.id+"</td></td>" +
+                            "<td>"+formatItemPedido(item.itens)+"</td>" +
+                            "<td>R$"+item.total+"</td>" +
+                            "<td>"+item.pagamento+"</td>" +
+                            "<td>"+item.nome+"</td>" +
+                            "<td>"+status[parseInt(item.status)-1]+"</td>";
+                tbody.appendChild(tr);
+            });
+
+            totalItens.innerHTML = "<h5>Total vendido nesse cardápio: R$"+total+"</h5>";
+            totalItens.style.display = "block";
         })
         .catch(error => {
             console.log('error', error)
         });
-    })
+    });
+
+    function formatItemPedido(itens){
+        let formatado = "";
+        if(itens){
+            let produtos = JSON.parse(itens);
+            produtos.forEach(function(item) {
+                formatado += "x "+item.quantidade+" - "+item.nome+"<br/>";
+            })
+        }
+        return formatado;
+    }
 </script>

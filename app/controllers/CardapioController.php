@@ -15,7 +15,7 @@ class CardapioController extends Controller{
 
     public function criar(){
         header('Content-Type: application/json; charset=utf-8');
-        $estoqueModel = $this->model("cardapio");
+        $estoqueModel = $this->model("Cardapio");
         $estoqueModel->createCardapio($_POST["descricao"],$_POST["data"],$_POST["status"]);
         $json = [];
         $json['item'] = $_POST["descricao"];
@@ -39,7 +39,7 @@ class CardapioController extends Controller{
 
     public function deletar(){
         header('Content-Type: application/json; charset=utf-8');
-        $cardapioModel = $this->model("cardapio");
+        $cardapioModel = $this->model("Cardapio");
         $cardapioModel->deletarCardapio($_POST["id"]);
         $json['status'] = 200;
         echo json_encode($json);
@@ -77,7 +77,7 @@ class CardapioController extends Controller{
 
     public function deletarItem(){
         header('Content-Type: application/json; charset=utf-8');
-        $cardapioModel = $this->model("cardapio");
+        $cardapioModel = $this->model("Cardapio");
         $cardapioModel->deletarItemCardapio($_POST["id"]);
         $json['status'] = 200;
         echo json_encode($json);

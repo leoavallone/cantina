@@ -49,7 +49,7 @@
                             }
                         ?>
                         <a class="options" href="/dashboard">Configurações</a> |
-                        <a class="options" href="/logout">Sair</a>
+                        <a class="options" href="/dashboard/logout">Sair</a>
                     </div>
                     <div class="avatar">
                         <a href="/login.php" data-link>

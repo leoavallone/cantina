@@ -15,7 +15,7 @@ class UsuarioController extends Controller{
 
     public function criar(){
         header('Content-Type: application/json; charset=utf-8');
-        $estoqueModel = $this->model("usuario");
+        $estoqueModel = $this->model("Usuario");
         $estoqueModel->createUser($_POST["login"],$_POST["email"],password_hash($_POST["password"], PASSWORD_DEFAULT),$_POST["nivel"],$_POST["nivel"]);
         $json = [];
         $json['item'] = $_POST["login"];
@@ -30,7 +30,7 @@ class UsuarioController extends Controller{
             return; 
         }
        
-        $estoqueModel = $this->model("usuario");
+        $estoqueModel = $this->model("Usuario");
         if($_POST["password"] === ""){
             $estoqueModel->editarUser($_POST["id"],$_POST["login"],$_POST["email"],"",$_POST["status"],$_POST["nivel"]);
         }else{
@@ -44,7 +44,7 @@ class UsuarioController extends Controller{
 
     public function deletar(){
         header('Content-Type: application/json; charset=utf-8');
-        $estoqueModel = $this->model("estoque");
+        $estoqueModel = $this->model("Usuario");
         $estoqueModel->deletarEstoque($_POST["id"]);
         $json['status'] = 200;
         echo json_encode($json);

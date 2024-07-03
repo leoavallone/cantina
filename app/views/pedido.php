@@ -21,7 +21,7 @@
 <div id="home">
     <div class="content-inner">
         <div class="countContainer">
-            <h3 class="text-center">Total vendido ate o momento:</h3>
+            <h3 class="text-center">Total vendido até o momento:</h3>
             <?php foreach ($totalPorItem as $item => $total):?>
                 <span class="uk-badge"><?php echo $item . ": " . $total;?> Unidades</span>
             <?php endforeach;?>
@@ -64,8 +64,6 @@
 </div>
 
 <script>
-    var dadosTabela = <?= $pedidos; ?>
-    console.log('Dados da tabela: ', dadosTabela);
     function recarregarPagina() {
         location.reload();
     }

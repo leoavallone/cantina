@@ -272,6 +272,7 @@
 
 .uk-card-title{
     margin-top: 10px;
+    font-size: 20px !important;
 }
 
 .trashButton, .editBtn{
@@ -401,4 +402,10 @@
     .logo img {
       width: 75px;
     }
+}
+
+@media print {
+  .navbar{
+    display: none;
+  }
 }

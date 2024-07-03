@@ -49,7 +49,7 @@ class MenuModel extends Model {
         $result->execute([$nome,$cardapioId]);
         return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
-
+    
     public function atualizaQtd($id,$nome,$quantidade){
         $pdo = $this->getPDO();
         $query = "UPDATE cardapio_itens SET quantidade=? WHERE nome=? AND cardapio_id=?";
