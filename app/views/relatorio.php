@@ -152,6 +152,5 @@
 
     function atualizaQuantidades(relacao){
         console.log(relacao);
-        // editar o html da variavel relacaoItens que esta a div (pesquise por innerHTML)
     }
 </script>
