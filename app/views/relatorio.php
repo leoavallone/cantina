@@ -88,17 +88,15 @@
                 tbody.innerHTML = "";
                 totalItens.innerHTML = "";
                 return
-            }  
+            }
             if(json.length === 0){
-                total = 0;
-                hasNoItens.style.display = "block";
-                tbody.innerHTML = "";
                 relacaoItens.innerHTML = "";
                 return
             }
             total = 0;
             hasNoItens.style.display = "none";
             tbody.innerHTML = "";
+            relacaoItens.innerHTML = "";
             json.forEach(function(item) {
                 getTotalIndivualInsume(item.itens);
                 total = total + parseInt(item.total);
@@ -114,14 +112,14 @@
 
             totalItens.innerHTML = "<h5>Total vendido nesse cardápio: R$"+total+"</h5>";
             totalItens.style.display = "block";
-            relacaoItens.innerHTML = "<h5>Quantidade por itens: "+total+"</h5>";
-            relacaoItens.style.display = "block";
+            
         })
         .catch(error => {
             console.log('error', error)
-        });
-
-        atualizaQuantidades(quantidadesPorNome);
+        })
+        .finally(() => {
+            atualizaQuantidades();
+        })
     });
 
     function formatItemPedido(itens){
@@ -140,17 +138,27 @@
         for (const obj of itens) {
             const { nome, quantidade } = obj;
             if (!quantidadesPorNome[nome]) {
-                Object.defineProperty(quantidadesPorNome, nome, {
-                    value: quantidade,
-                    writable: true,
-                });
+                quantidadesPorNome[nome] = quantidade;
             } else {
                 quantidadesPorNome[nome] += quantidade;
             }
         }
     }
 
-    function atualizaQuantidades(relacao){
-        console.log(relacao);
+    function atualizaQuantidades() {
+        console.log(quantidadesPorNome);
+        var ul = document.createElement("ul");
+        ul.className = "listaItens";
+        ul.innerHTML = "";
+        for (const chave in quantidadesPorNome) {
+            if (quantidadesPorNome.hasOwnProperty(chave)) {
+                console.log(`${chave}: ${quantidadesPorNome[chave]}`);
+                var li = document.createElement("li");
+                li.innerHTML = `${chave}: ${quantidadesPorNome[chave]} unidades`;
+                ul.appendChild(li);
+            }
+        }
+        relacaoItens.appendChild(ul);
     }
+
 </script>

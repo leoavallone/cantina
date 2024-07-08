@@ -370,6 +370,20 @@
   color: #fff !important;
 }
 
+.listaItens {
+  padding: 0px;
+}
+
+.listaItens li {
+  display: inline-block;
+  margin-right: 20px;
+  background: #39f;
+  padding: 5px;
+  border-radius: 20px;
+  color: #fff;
+  margin-top: 10px;
+}
+
 @media(max-width: 768px){
     #menuToggle{
       position: absolute;
