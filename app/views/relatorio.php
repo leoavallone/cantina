@@ -25,6 +25,7 @@
             <h5>Não há vendas deste cardápio</h5>
         </div>
         <div id="totalItens"></div>
+        <div id="relacaoItens"></div>
         <table class="uk-table uk-table-striped">
             <thead>
                 <tr>
@@ -45,12 +46,14 @@
     // Seletor de cardápios
     const hasNoItens = document.getElementById('hasNoItens');
     const totalItens = document.getElementById('totalItens');
+    const relacaoItens = document.getElementById('relacaoItens');
     hasNoItens.style.display = "none";
     totalItens.style.display = "none";
     const cardapios = document.getElementById('cardapios');
     const status = ["Ativo", "Finalizado"];
     let tbody = document.getElementById("relatorio-table");
     let total = 0;
+    var quantidadesPorNome = {};
     // Adiciona evento de mudança ao seletor
     cardapios.addEventListener('change', (event) => {
         // Obtém o valor da opção selecionada
@@ -85,11 +88,19 @@
                 tbody.innerHTML = "";
                 totalItens.innerHTML = "";
                 return
+            }  
+            if(json.length === 0){
+                total = 0;
+                hasNoItens.style.display = "block";
+                tbody.innerHTML = "";
+                relacaoItens.innerHTML = "";
+                return
             }
             total = 0;
             hasNoItens.style.display = "none";
             tbody.innerHTML = "";
             json.forEach(function(item) {
+                getTotalIndivualInsume(item.itens);
                 total = total + parseInt(item.total);
                 var tr = document.createElement("tr");
                 tr.innerHTML = "<td>"+item.id+"</td></td>" +
@@ -103,10 +114,14 @@
 
             totalItens.innerHTML = "<h5>Total vendido nesse cardápio: R$"+total+"</h5>";
             totalItens.style.display = "block";
+            relacaoItens.innerHTML = "<h5>Quantidade por itens: "+total+"</h5>";
+            relacaoItens.style.display = "block";
         })
         .catch(error => {
             console.log('error', error)
         });
+
+        atualizaQuantidades(quantidadesPorNome);
     });
 
     function formatItemPedido(itens){
@@ -118,5 +133,25 @@
             })
         }
         return formatado;
+    }
+   
+    function getTotalIndivualInsume(item){
+        var itens = JSON.parse(item);
+        for (const obj of itens) {
+            const { nome, quantidade } = obj;
+            if (!quantidadesPorNome[nome]) {
+                Object.defineProperty(quantidadesPorNome, nome, {
+                    value: quantidade,
+                    writable: true,
+                });
+            } else {
+                quantidadesPorNome[nome] += quantidade;
+            }
+        }
+    }
+
+    function atualizaQuantidades(relacao){
+        console.log(relacao);
+        // editar o html da variavel relacaoItens que esta a div (pesquise por innerHTML)
     }
 </script>
