@@ -129,9 +129,6 @@
                             <span class="uk-form-icon" uk-icon="icon: info"></span>
                             <input id="nome" name="nome" class="uk-input" type="text" aria-label="Not clickable icon" placeholder="Nome:">
                         </div>
-                        <div class="uk-inline uk-width-1-1">
-                            <textarea class="uk-textarea" rows="5" id="observacao" placeholder="Observação: " aria-label="Textarea" placeholder="Observação:"></textarea>
-                        </div>
                     </div>
                 </form>
                 <p class="uk-text-right" id="finish">
@@ -404,7 +401,6 @@
         urlencoded.append("itens", JSON.stringify(carrinho));
         urlencoded.append("pagamento", modoDePagamento);   
         urlencoded.append("nome", menuForm.nome.value);
-        urlencoded.append("observacao", menuForm.observacao.value);
         urlencoded.append("total", total);
         urlencoded.append("modalidade", modalidade);
         

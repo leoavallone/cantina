@@ -49,7 +49,6 @@
                             endif;
                         ?>
                         <h3>Consumo: <?= $value['modalidade'] ?></h3>
-                        <h3>Observação: <?= $value['observacao'] ?></h3>
                     </div>
                     <?php if($value['status'] == 1): ?>
                         <button onclick="finalizarPedido(<?= $value['id'] ?>)" class="finalizado uk-button uk-button-primary">Finalizar</button>

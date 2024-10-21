@@ -16,7 +16,7 @@ class MenuController extends Controller{
     public function finalizarPedido(){
         header('Content-Type: application/json; charset=utf-8');
         $estoqueModel = $this->model("Menu");
-        $estoqueModel->createPedido($_POST["cardapioId"],$_POST["itens"],$_POST["total"],$_POST["pagamento"],$_POST["nome"],$_POST["modalidade"],$_POST["observacao"],1);
+        $estoqueModel->createPedido($_POST["cardapioId"],$_POST["itens"],$_POST["total"],$_POST["pagamento"],$_POST["nome"],$_POST["modalidade"],1);
         $json = [];
         $json['item'] = $_POST["nome"];
         echo json_encode($json);

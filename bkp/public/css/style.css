@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;1,100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+body{
+  margin: 0;
+  font-family: 'noto san' sans-serif;
+  background: #f7f7f7;
+}
+
+.main-login{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+.left-login{
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.left-login >h1{
+  color: rgba(0, 94, 255, 0.432);
+}
+
+.right-login{
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.card-login{
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 35px;
+  border-radius: 20px;
+  box-shadow: 0% 10px 40px #180545 ;
+}
+
+.card-login >h1, .card-login >h1 {  
+  color: #000;
+  font-weight: 800;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.card-cardapio{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 35px;
+  border-radius: 20px;
+}
+
+.textfield{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 10px
+}
+
+.textfield > input{
+  width: 100%;
+  border: 1px solid #666;
+  border-radius: 10px;
+  padding: 15px;
+  background: #fff;
+  color: #f0ffffde;
+  font-size: 12pt;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.textfield > label{
+  color: #000;
+  margin-bottom: 10px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.textfield > input ::placeholder{
+  color: #f0ffff94;
+}
+
+.btn-login{
+  width: 380px;
+  padding: 16px 0px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #180545;
+  background: #20bee3;
+  cursor: pointer;
+  box-shadow: 0px 10 px 40px -12px #20bee3;
+  font-family: 'Roboto', sans-serif;
+}
+
+.img-logo{
+  width: 200px !important;
+  border: none;
+  border-radius: 8px;
+}
+
+.logo{
+  padding: 20px;
+  border: none;
+  border-radius: 15px;
+}
+
+.mid-login{
+  text-align: center;
+  position: relative;
+}
+
+.title {
+  font-family:'Dancing Script', cursive;
+  font-size: 80px;
+}
+
+.card-login .uk-input {
+  height: 55px;
+  width: 380px;
+  border-radius: 15px;
+}
+
+.radius {
+  border-radius: 25px !important;
+}
+
+.border{
+  border: 1px solid #ccc;
+  border-radius: 10px !important;
+}

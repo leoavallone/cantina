@@ -21,7 +21,6 @@
  }
  
  a{
-    color: white !important;
     font-size: larger;
  }
 
@@ -34,12 +33,9 @@
     color: white;
     font-size: larger;
     font-style: oblique;
+    border-right: 1px solid #fff;
     padding-right: 15px;
  }
-
- .logo img{
-    width: 40%;
-  }
 
  ul{
     list-style: none;
@@ -66,7 +62,6 @@
     color: rgb(255, 255, 255) !important;
     margin-right: 15px;
     margin-bottom: 0px;
-    font-size: 18px;
 }
 
 .btlogin a {
@@ -84,8 +79,7 @@
 }
 
 .info {
-    text-align: left;
-    margin-right: 15px;
+    text-align: center;
 }
 
 .options {
@@ -229,11 +223,6 @@
   background: linear-gradient(-90deg, rgb(240, 240, 240), rgb(255, 255, 255));
 }
 
-.content-inner {
-  padding: 5% 5% 10% 5% !important;
-  background: linear-gradient(-90deg, rgb(240, 240, 240), rgb(255, 255, 255));
-}
-
 .footer {
   background: #fff;
   padding: 1.5% 5%;
@@ -272,106 +261,20 @@
 
 .uk-card-title{
     margin-top: 10px;
-    font-size: 20px !important;
 }
 
-.trashButton, .editBtn{
-  color: #666 !important;
+#home {
+    padding: 0px 35px;
+    display: block;
 }
 
-.cover{
-  width:100%
+#home .title{
+    font-size: 26px;
+    margin-top: 50px;
 }
 
-.menu {
-  max-width: 768px;
-  display: block;
-  margin: 0px auto;
-}
-
-.quantidade {
-  text-align: left;
-  color: white;
-  padding: 15px;
-  width: 100%;
-  height: 160px;
-  overflow: scroll;
-}
-
-.quantidade h3{
-  font-size: 16px;
-  margin-top: 5px;
-}
-
-.finalizado {
-  border-radius: 20px !important; 
-}
-
-.hideBox{
-  display: none !important;
-}
-
-.fullbackground{
-  min-height: 100%;
-}
-
-.margin-break{
-  margin-top: 50px;
-}
-
-.cart{
-  border: 1px solid #ccc;
-  display: block;
-  margin: 50px auto;
-  padding: 10px;
-  width: 768px;
-  background: white;  
-}
-
-.pedidoCard .uk-card {
-
-}
-
-.pedidoCard h2 {
-  font-size: 18px;
-}
-
-.menu .uk-card-body {
-  min-height: 160px;
-}
-
-#quantidadeEdit, #precoEdit {
-  width: 70px;
-}
-
-.finishBottom {
-  background: red;
-  color: white;
-  padding: 5px;
-  border-radius: 20px;
-}
-
-.countContainer {
-  margin-bottom: 50px;
-}
-
-.countContainer .uk-badge {
-  box-sizing: border-box;
-  min-width: 30px;
-  height: 30px;
-  padding: 0 8px;
-  font-size: 13px;
-  margin-bottom: 10px;
-}
-
-.outStock {
-  background: red;
-  border-radius: 20px;
-  color: #fff !important;
-}
-
-#observacao{
-    margin-top: 15px;
+#home .uk-table{
+    margin: 25px auto 0px auto;
 }
 
 @media(max-width: 768px){
@@ -406,10 +309,4 @@
     .logo img {
       width: 75px;
     }
-}
-
-@media print {
-  .navbar{
-    display: none;
-  }
 }

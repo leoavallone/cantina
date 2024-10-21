@@ -13,11 +13,11 @@ class MenuModel extends Model {
         return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function createPedido($cardapioId,$itens,$total,$pagamento,$nome,$modalidade,$observacao,$status){
+    public function createPedido($cardapioId,$itens,$total,$pagamento,$nome,$modalidade,$status){
         $pdo = $this->getPDO();
-        $query = "INSERT INTO pedidos (cardapio_id, itens, total, pagamento, nome, modalidade, observacao, status) values(?,?,?,?,?,?,?,?)";
+        $query = "INSERT INTO pedidos (cardapio_id, itens, total, pagamento, nome, modalidade, status) values(?,?,?,?,?,?,?)";
         $result = $pdo->prepare($query);
-        return $result->execute([$cardapioId,$itens,$total,$pagamento,$nome,$modalidade,$observacao,$status]);
+        return $result->execute([$cardapioId,$itens,$total,$pagamento,$nome,$modalidade,$status]);
     }
 
     public function editarPedido($id,$nome,$descricao,$quantidade){
